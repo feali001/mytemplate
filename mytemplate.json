@@ -1,0 +1,3109 @@
+{
+    "kind": "Template",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "myapplication",
+        "creationTimestamp": null
+    },
+    "objects": [
+        {
+            "kind": "BuildConfig",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "triggers": [
+                    {
+                        "type": "GitHub",
+                        "github": {
+                            "secret": "j3t3xyd7f4lS7vY1Ug8f"
+                        }
+                    },
+                    {
+                        "type": "Generic",
+                        "generic": {
+                            "secret": "Adx64DQsca92uiRZYy72"
+                        }
+                    },
+                    {
+                        "type": "ConfigChange"
+                    },
+                    {
+                        "type": "ImageChange",
+                        "imageChange": {}
+                    }
+                ],
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "https://github.com/feali001/book-insultapp.git"
+                    },
+                    "secrets": []
+                },
+                "strategy": {
+                    "type": "Source",
+                    "sourceStrategy": {
+                        "from": {
+                            "kind": "ImageStreamTag",
+                            "namespace": "openshift",
+                            "name": "wildfly:latest"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "insults:latest"
+                    }
+                },
+                "resources": {},
+                "postCommit": {}
+            },
+            "status": {
+                "lastVersion": 0
+            }
+        },
+        {
+            "kind": "Build",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-1",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults",
+                    "buildconfig": "insults",
+                    "openshift.io/build-config.name": "insults"
+                },
+                "annotations": {
+                    "openshift.io/build.number": "1",
+                    "openshift.io/build.pod-name": "insults-1-build"
+                }
+            },
+            "spec": {
+                "serviceAccount": "builder",
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "https://github.com/feali001/book-insultapp.git"
+                    },
+                    "secrets": []
+                },
+                "revision": {
+                    "type": "Git",
+                    "git": {
+                        "commit": "d9d20f703a9dfb0a12f756cbceb0414eef56cd25",
+                        "author": {
+                            "name": "Grant Shipley",
+                            "email": "gshipley@gmail.com"
+                        },
+                        "committer": {
+                            "name": "Grant Shipley",
+                            "email": "gshipley@gmail.com"
+                        },
+                        "message": "reduce insults"
+                    }
+                },
+                "strategy": {
+                    "type": "Source",
+                    "sourceStrategy": {
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "insults:latest"
+                    },
+                    "pushSecret": {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                },
+                "resources": {},
+                "postCommit": {}
+            },
+            "status": {
+                "phase": "New",
+                "outputDockerImageReference": "172.30.200.195:5000/insultapp3/insults:latest",
+                "config": {
+                    "name": "insults"
+                }
+            }
+        },
+        {
+            "kind": "Build",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-2",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults",
+                    "buildconfig": "insults",
+                    "openshift.io/build-config.name": "insults"
+                },
+                "annotations": {
+                    "openshift.io/build.number": "2",
+                    "openshift.io/build.pod-name": "insults-2-build"
+                }
+            },
+            "spec": {
+                "serviceAccount": "builder",
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "https://github.com/feali001/book-insultapp.git"
+                    },
+                    "secrets": []
+                },
+                "revision": {
+                    "type": "Git",
+                    "git": {
+                        "commit": "cfdc315726f25cb7c35227bc03ec3608a08ae315",
+                        "author": {
+                            "name": "fad",
+                            "email": "fealipaz@aol.com"
+                        },
+                        "committer": {
+                            "name": "fad",
+                            "email": "fealipaz@aol.com"
+                        },
+                        "message": "Minor changes"
+                    }
+                },
+                "strategy": {
+                    "type": "Source",
+                    "sourceStrategy": {
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "insults:latest"
+                    },
+                    "pushSecret": {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                },
+                "resources": {},
+                "postCommit": {}
+            },
+            "status": {
+                "phase": "New",
+                "outputDockerImageReference": "172.30.200.195:5000/insultapp3/insults:latest",
+                "config": {
+                    "name": "insults"
+                }
+            }
+        },
+        {
+            "kind": "Build",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-3",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults",
+                    "buildconfig": "insults",
+                    "openshift.io/build-config.name": "insults"
+                },
+                "annotations": {
+                    "openshift.io/build.number": "3",
+                    "openshift.io/build.pod-name": "insults-3-build"
+                }
+            },
+            "spec": {
+                "serviceAccount": "builder",
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "https://github.com/feali001/book-insultapp.git"
+                    },
+                    "secrets": []
+                },
+                "revision": {
+                    "type": "Git",
+                    "git": {
+                        "commit": "cfdc315726f25cb7c35227bc03ec3608a08ae315",
+                        "author": {
+                            "name": "fad",
+                            "email": "fealipaz@aol.com"
+                        },
+                        "committer": {
+                            "name": "fad",
+                            "email": "fealipaz@aol.com"
+                        },
+                        "message": "Minor changes"
+                    }
+                },
+                "strategy": {
+                    "type": "Source",
+                    "sourceStrategy": {
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "insults:latest"
+                    },
+                    "pushSecret": {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                },
+                "resources": {},
+                "postCommit": {}
+            },
+            "status": {
+                "phase": "New",
+                "outputDockerImageReference": "172.30.200.195:5000/insultapp3/insults:latest",
+                "config": {
+                    "name": "insults"
+                }
+            }
+        },
+        {
+            "kind": "Build",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-4",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults",
+                    "buildconfig": "insults",
+                    "openshift.io/build-config.name": "insults"
+                },
+                "annotations": {
+                    "openshift.io/build.number": "4",
+                    "openshift.io/build.pod-name": "insults-4-build"
+                }
+            },
+            "spec": {
+                "serviceAccount": "builder",
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "https://github.com/feali001/book-insultapp.git"
+                    },
+                    "secrets": []
+                },
+                "revision": {
+                    "type": "Git",
+                    "git": {
+                        "commit": "cfdc315726f25cb7c35227bc03ec3608a08ae315",
+                        "author": {
+                            "name": "fad",
+                            "email": "fealipaz@aol.com"
+                        },
+                        "committer": {
+                            "name": "fad",
+                            "email": "fealipaz@aol.com"
+                        },
+                        "message": "Minor changes"
+                    }
+                },
+                "strategy": {
+                    "type": "Source",
+                    "sourceStrategy": {
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "insults:latest"
+                    },
+                    "pushSecret": {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                },
+                "resources": {},
+                "postCommit": {}
+            },
+            "status": {
+                "phase": "New",
+                "outputDockerImageReference": "172.30.200.195:5000/insultapp3/insults:latest",
+                "config": {
+                    "name": "insults"
+                }
+            }
+        },
+        {
+            "kind": "Build",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-5",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults",
+                    "buildconfig": "insults",
+                    "openshift.io/build-config.name": "insults"
+                },
+                "annotations": {
+                    "openshift.io/build.number": "5",
+                    "openshift.io/build.pod-name": "insults-5-build"
+                }
+            },
+            "spec": {
+                "serviceAccount": "builder",
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "https://github.com/feali001/book-insultapp.git"
+                    },
+                    "secrets": []
+                },
+                "revision": {
+                    "type": "Git",
+                    "git": {
+                        "commit": "c8c6fd5eb1c49f5226752a6a49740f2ab7d0726e",
+                        "author": {
+                            "name": "fad",
+                            "email": "fealipaz@aol.com"
+                        },
+                        "committer": {
+                            "name": "fad",
+                            "email": "fealipaz@aol.com"
+                        },
+                        "message": "Change java"
+                    }
+                },
+                "strategy": {
+                    "type": "Source",
+                    "sourceStrategy": {
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "insults:latest"
+                    },
+                    "pushSecret": {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                },
+                "resources": {},
+                "postCommit": {}
+            },
+            "status": {
+                "phase": "New",
+                "outputDockerImageReference": "172.30.200.195:5000/insultapp3/insults:latest",
+                "config": {
+                    "name": "insults"
+                }
+            }
+        },
+        {
+            "kind": "Build",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-6",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults",
+                    "buildconfig": "insults",
+                    "openshift.io/build-config.name": "insults"
+                },
+                "annotations": {
+                    "openshift.io/build.number": "6",
+                    "openshift.io/build.pod-name": "insults-6-build"
+                }
+            },
+            "spec": {
+                "serviceAccount": "builder",
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "https://github.com/feali001/book-insultapp.git"
+                    },
+                    "secrets": []
+                },
+                "revision": {
+                    "type": "Git",
+                    "git": {
+                        "commit": "c8c6fd5eb1c49f5226752a6a49740f2ab7d0726e",
+                        "author": {
+                            "name": "fad",
+                            "email": "fealipaz@aol.com"
+                        },
+                        "committer": {
+                            "name": "fad",
+                            "email": "fealipaz@aol.com"
+                        },
+                        "message": "Change java"
+                    }
+                },
+                "strategy": {
+                    "type": "Source",
+                    "sourceStrategy": {
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "insults:latest"
+                    },
+                    "pushSecret": {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                },
+                "resources": {},
+                "postCommit": {}
+            },
+            "status": {
+                "phase": "New",
+                "outputDockerImageReference": "172.30.200.195:5000/insultapp3/insults:latest",
+                "config": {
+                    "name": "insults"
+                }
+            }
+        },
+        {
+            "kind": "Build",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-7",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults",
+                    "buildconfig": "insults",
+                    "openshift.io/build-config.name": "insults"
+                },
+                "annotations": {
+                    "openshift.io/build.number": "7",
+                    "openshift.io/build.pod-name": "insults-7-build"
+                }
+            },
+            "spec": {
+                "serviceAccount": "builder",
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "https://github.com/feali001/book-insultapp.git"
+                    },
+                    "secrets": []
+                },
+                "revision": {
+                    "type": "Git",
+                    "git": {
+                        "commit": "37e05a1601f6942c28ee5538ef9e47af975a1ba2",
+                        "author": {
+                            "name": "fad",
+                            "email": "fealipaz@aol.com"
+                        },
+                        "committer": {
+                            "name": "fad",
+                            "email": "fealipaz@aol.com"
+                        },
+                        "message": "java again"
+                    }
+                },
+                "strategy": {
+                    "type": "Source",
+                    "sourceStrategy": {
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "insults:latest"
+                    },
+                    "pushSecret": {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                },
+                "resources": {},
+                "postCommit": {}
+            },
+            "status": {
+                "phase": "New",
+                "outputDockerImageReference": "172.30.200.195:5000/insultapp3/insults:latest",
+                "config": {
+                    "name": "insults"
+                }
+            }
+        },
+        {
+            "kind": "Build",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-8",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults",
+                    "buildconfig": "insults",
+                    "openshift.io/build-config.name": "insults"
+                },
+                "annotations": {
+                    "openshift.io/build.number": "8",
+                    "openshift.io/build.pod-name": "insults-8-build"
+                }
+            },
+            "spec": {
+                "serviceAccount": "builder",
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "https://github.com/feali001/book-insultapp.git"
+                    },
+                    "secrets": []
+                },
+                "revision": {
+                    "type": "Git",
+                    "git": {
+                        "commit": "b95e2be9a697660e728261d8fd9bd32dcc02b519",
+                        "author": {
+                            "name": "fad",
+                            "email": "fealipaz@aol.com"
+                        },
+                        "committer": {
+                            "name": "fad",
+                            "email": "fealipaz@aol.com"
+                        },
+                        "message": "again"
+                    }
+                },
+                "strategy": {
+                    "type": "Source",
+                    "sourceStrategy": {
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "insults:latest"
+                    },
+                    "pushSecret": {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                },
+                "resources": {},
+                "postCommit": {}
+            },
+            "status": {
+                "phase": "New",
+                "outputDockerImageReference": "172.30.200.195:5000/insultapp3/insults:latest",
+                "config": {
+                    "name": "insults"
+                }
+            }
+        },
+        {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "tags": [
+                    {
+                        "name": "latest",
+                        "annotations": null,
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "172.30.200.195:5000/insultapp3/insults:latest"
+                        },
+                        "generation": null,
+                        "importPolicy": {}
+                    }
+                ]
+            },
+            "status": {
+                "dockerImageRepository": ""
+            }
+        },
+        {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "tomcat",
+                "generation": 2,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "tomcat"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/image.dockerRepositoryCheck": "2018-03-08T14:12:35Z"
+                }
+            },
+            "spec": {
+                "tags": [
+                    {
+                        "name": "8.0",
+                        "annotations": {
+                            "openshift.io/imported-from": "tomcat:8.0"
+                        },
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "172.30.200.195:5000/insultapp3/tomcat:8.0"
+                        },
+                        "generation": 2,
+                        "importPolicy": {}
+                    }
+                ]
+            },
+            "status": {
+                "dockerImageRepository": ""
+            }
+        },
+        {
+            "kind": "DeploymentConfig",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults"
+                },
+                "annotations": {
+                    "openshift.io/deployment.cancelled": "4",
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "strategy": {
+                    "type": "Rolling",
+                    "rollingParams": {
+                        "updatePeriodSeconds": 1,
+                        "intervalSeconds": 1,
+                        "timeoutSeconds": 600,
+                        "maxUnavailable": "25%",
+                        "maxSurge": "25%"
+                    },
+                    "resources": {}
+                },
+                "triggers": [
+                    {
+                        "type": "ConfigChange"
+                    },
+                    {
+                        "type": "ImageChange",
+                        "imageChangeParams": {
+                            "automatic": true,
+                            "containerNames": [
+                                "insults"
+                            ],
+                            "from": {
+                                "kind": "ImageStreamTag",
+                                "name": "insults:latest"
+                            }
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "test": false,
+                "selector": {
+                    "app": "insults",
+                    "deploymentconfig": "insults"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "app": "insults",
+                            "deploymentconfig": "insults"
+                        },
+                        "annotations": {
+                            "openshift.io/container.insults.image.entrypoint": "[\"container-entrypoint\",\"/bin/sh\",\"-c\",\"$STI_SCRIPTS_PATH/usage\"]",
+                            "openshift.io/generated-by": "OpenShiftNewApp"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "insults",
+                                "image": "172.30.200.195:5000/insultapp3/insults@sha256:c03a8f27b16c4c74b783172561968144ca257b7e54a5dd6921be50ab6e0957a1",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "env": [
+                                    {
+                                        "name": "POSTGRESQL_USER",
+                                        "value": "insult"
+                                    },
+                                    {
+                                        "name": "PGPASSWORD",
+                                        "value": "insult"
+                                    },
+                                    {
+                                        "name": "POSTGRESQL_DATABASE",
+                                        "value": "insults"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "imagePullPolicy": "Always"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {}
+                    }
+                }
+            },
+            "status": {}
+        },
+        {
+            "kind": "DeploymentConfig",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "postgresql",
+                "creationTimestamp": null,
+                "labels": {
+                    "template": "postgresql-persistent-template"
+                }
+            },
+            "spec": {
+                "strategy": {
+                    "type": "Recreate",
+                    "recreateParams": {
+                        "timeoutSeconds": 600
+                    },
+                    "resources": {}
+                },
+                "triggers": [
+                    {
+                        "type": "ImageChange",
+                        "imageChangeParams": {
+                            "automatic": true,
+                            "containerNames": [
+                                "postgresql"
+                            ],
+                            "from": {
+                                "kind": "ImageStreamTag",
+                                "namespace": "openshift",
+                                "name": "postgresql:latest"
+                            }
+                        }
+                    },
+                    {
+                        "type": "ConfigChange"
+                    }
+                ],
+                "replicas": 1,
+                "test": false,
+                "selector": {
+                    "name": "postgresql"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "name": "postgresql"
+                        }
+                    },
+                    "spec": {
+                        "volumes": [
+                            {
+                                "name": "postgresql-data",
+                                "persistentVolumeClaim": {
+                                    "claimName": "postgresql"
+                                }
+                            }
+                        ],
+                        "containers": [
+                            {
+                                "name": "postgresql",
+                                "image": "registry.access.redhat.com/rhscl/postgresql-94-rhel7:latest",
+                                "ports": [
+                                    {
+                                        "containerPort": 5432,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "env": [
+                                    {
+                                        "name": "POSTGRESQL_USER",
+                                        "value": "insult"
+                                    },
+                                    {
+                                        "name": "POSTGRESQL_PASSWORD",
+                                        "value": "insult"
+                                    },
+                                    {
+                                        "name": "POSTGRESQL_DATABASE",
+                                        "value": "insults"
+                                    }
+                                ],
+                                "resources": {
+                                    "limits": {
+                                        "memory": "512Mi"
+                                    }
+                                },
+                                "volumeMounts": [
+                                    {
+                                        "name": "postgresql-data",
+                                        "mountPath": "/var/lib/pgsql/data"
+                                    }
+                                ],
+                                "livenessProbe": {
+                                    "tcpSocket": {
+                                        "port": 5432
+                                    },
+                                    "initialDelaySeconds": 30,
+                                    "timeoutSeconds": 1,
+                                    "periodSeconds": 10,
+                                    "successThreshold": 1,
+                                    "failureThreshold": 3
+                                },
+                                "readinessProbe": {
+                                    "exec": {
+                                        "command": [
+                                            "/bin/sh",
+                                            "-i",
+                                            "-c",
+                                            "psql -h 127.0.0.1 -U $POSTGRESQL_USER -q -d $POSTGRESQL_DATABASE -c 'SELECT 1'"
+                                        ]
+                                    },
+                                    "initialDelaySeconds": 5,
+                                    "timeoutSeconds": 1,
+                                    "periodSeconds": 10,
+                                    "successThreshold": 1,
+                                    "failureThreshold": 3
+                                },
+                                "terminationMessagePath": "/dev/termination-log",
+                                "imagePullPolicy": "IfNotPresent",
+                                "securityContext": {
+                                    "capabilities": {},
+                                    "privileged": false
+                                }
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {}
+                    }
+                }
+            },
+            "status": {}
+        },
+        {
+            "kind": "DeploymentConfig",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "tomcat",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "tomcat"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "strategy": {
+                    "type": "Rolling",
+                    "rollingParams": {
+                        "updatePeriodSeconds": 1,
+                        "intervalSeconds": 1,
+                        "timeoutSeconds": 600,
+                        "maxUnavailable": "25%",
+                        "maxSurge": "25%"
+                    },
+                    "resources": {}
+                },
+                "triggers": [
+                    {
+                        "type": "ConfigChange"
+                    },
+                    {
+                        "type": "ImageChange",
+                        "imageChangeParams": {
+                            "automatic": true,
+                            "containerNames": [
+                                "tomcat"
+                            ],
+                            "from": {
+                                "kind": "ImageStreamTag",
+                                "name": "tomcat:8.0"
+                            }
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "test": false,
+                "selector": {
+                    "app": "tomcat",
+                    "deploymentconfig": "tomcat"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "app": "tomcat",
+                            "deploymentconfig": "tomcat"
+                        },
+                        "annotations": {
+                            "openshift.io/container.tomcat.image.entrypoint": "[\"catalina.sh\",\"run\"]",
+                            "openshift.io/generated-by": "OpenShiftNewApp"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "tomcat",
+                                "image": "tomcat@sha256:20497d1508e60df8f2bc24a061e4badec64e20888d32615190ad5bda2c645a08",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "imagePullPolicy": "IfNotPresent"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {}
+                    }
+                }
+            },
+            "status": {}
+        },
+        {
+            "kind": "ReplicationController",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-1",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults",
+                    "openshift.io/deployment-config.name": "insults"
+                },
+                "annotations": {
+                    "kubectl.kubernetes.io/original-replicas": "1",
+                    "openshift.io/deployer-pod.name": "insults-1-deploy",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "insults",
+                    "openshift.io/deployment.phase": "Complete",
+                    "openshift.io/deployment.replicas": "0",
+                    "openshift.io/encoded-deployment-config": "{\"kind\":\"DeploymentConfig\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"insults\",\"namespace\":\"insultapp3\",\"selfLink\":\"/oapi/v1/namespaces/insultapp3/deploymentconfigs/insults\",\"uid\":\"6f2f1993-22c5-11e8-9b10-525400659b2e\",\"resourceVersion\":\"10312\",\"creationTimestamp\":\"2018-03-08T11:40:00Z\",\"labels\":{\"app\":\"insults\"},\"annotations\":{\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"strategy\":{\"type\":\"Rolling\",\"rollingParams\":{\"updatePeriodSeconds\":1,\"intervalSeconds\":1,\"timeoutSeconds\":600,\"maxUnavailable\":\"25%\",\"maxSurge\":\"25%\"},\"resources\":{}},\"triggers\":[{\"type\":\"ConfigChange\"},{\"type\":\"ImageChange\",\"imageChangeParams\":{\"automatic\":true,\"containerNames\":[\"insults\"],\"from\":{\"kind\":\"ImageStreamTag\",\"name\":\"insults:latest\"},\"lastTriggeredImage\":\"172.30.200.195:5000/insultapp3/insults@sha256:f3ed099d336977aca218a3840288c35d89837655910530c95b5ac6d1c3751555\"}}],\"replicas\":1,\"test\":false,\"selector\":{\"app\":\"insults\",\"deploymentconfig\":\"insults\"},\"template\":{\"metadata\":{\"creationTimestamp\":null,\"labels\":{\"app\":\"insults\",\"deploymentconfig\":\"insults\"},\"annotations\":{\"openshift.io/container.insults.image.entrypoint\":\"[\\\"container-entrypoint\\\",\\\"/bin/sh\\\",\\\"-c\\\",\\\"$STI_SCRIPTS_PATH/usage\\\"]\",\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"containers\":[{\"name\":\"insults\",\"image\":\"172.30.200.195:5000/insultapp3/insults@sha256:f3ed099d336977aca218a3840288c35d89837655910530c95b5ac6d1c3751555\",\"ports\":[{\"containerPort\":8080,\"protocol\":\"TCP\"}],\"resources\":{},\"terminationMessagePath\":\"/dev/termination-log\",\"imagePullPolicy\":\"Always\"}],\"restartPolicy\":\"Always\",\"terminationGracePeriodSeconds\":30,\"dnsPolicy\":\"ClusterFirst\",\"securityContext\":{}}}},\"status\":{\"latestVersion\":1,\"details\":{\"causes\":[{\"type\":\"ImageChange\",\"imageTrigger\":{\"from\":{\"kind\":\"ImageStreamTag\",\"name\":\"insults:latest\"}}}]}}}\n"
+                }
+            },
+            "spec": {
+                "replicas": 0,
+                "selector": {
+                    "app": "insults",
+                    "deployment": "insults-1",
+                    "deploymentconfig": "insults"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "app": "insults",
+                            "deployment": "insults-1",
+                            "deploymentconfig": "insults"
+                        },
+                        "annotations": {
+                            "openshift.io/container.insults.image.entrypoint": "[\"container-entrypoint\",\"/bin/sh\",\"-c\",\"$STI_SCRIPTS_PATH/usage\"]",
+                            "openshift.io/deployment-config.latest-version": "1",
+                            "openshift.io/deployment-config.name": "insults",
+                            "openshift.io/deployment.name": "insults-1",
+                            "openshift.io/generated-by": "OpenShiftNewApp"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "insults",
+                                "image": "172.30.200.195:5000/insultapp3/insults@sha256:f3ed099d336977aca218a3840288c35d89837655910530c95b5ac6d1c3751555",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "imagePullPolicy": "Always"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {}
+                    }
+                }
+            },
+            "status": {
+                "replicas": 0
+            }
+        },
+        {
+            "kind": "ReplicationController",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-2",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults",
+                    "openshift.io/deployment-config.name": "insults"
+                },
+                "annotations": {
+                    "kubectl.kubernetes.io/original-replicas": "1",
+                    "openshift.io/deployer-pod.name": "insults-2-deploy",
+                    "openshift.io/deployment-config.latest-version": "2",
+                    "openshift.io/deployment-config.name": "insults",
+                    "openshift.io/deployment.phase": "Complete",
+                    "openshift.io/deployment.replicas": "0",
+                    "openshift.io/encoded-deployment-config": "{\"kind\":\"DeploymentConfig\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"insults\",\"namespace\":\"insultapp3\",\"selfLink\":\"/oapi/v1/namespaces/insultapp3/deploymentconfigs/insults\",\"uid\":\"6f2f1993-22c5-11e8-9b10-525400659b2e\",\"resourceVersion\":\"10428\",\"creationTimestamp\":\"2018-03-08T11:40:00Z\",\"labels\":{\"app\":\"insults\"},\"annotations\":{\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"strategy\":{\"type\":\"Rolling\",\"rollingParams\":{\"updatePeriodSeconds\":1,\"intervalSeconds\":1,\"timeoutSeconds\":600,\"maxUnavailable\":\"25%\",\"maxSurge\":\"25%\"},\"resources\":{}},\"triggers\":[{\"type\":\"ConfigChange\"},{\"type\":\"ImageChange\",\"imageChangeParams\":{\"automatic\":true,\"containerNames\":[\"insults\"],\"from\":{\"kind\":\"ImageStreamTag\",\"name\":\"insults:latest\"},\"lastTriggeredImage\":\"172.30.200.195:5000/insultapp3/insults@sha256:870c662b4547805502964cb33e4e1197573ccfc0a81149bd99518988b47b1b58\"}}],\"replicas\":1,\"test\":false,\"selector\":{\"app\":\"insults\",\"deploymentconfig\":\"insults\"},\"template\":{\"metadata\":{\"creationTimestamp\":null,\"labels\":{\"app\":\"insults\",\"deploymentconfig\":\"insults\"},\"annotations\":{\"openshift.io/container.insults.image.entrypoint\":\"[\\\"container-entrypoint\\\",\\\"/bin/sh\\\",\\\"-c\\\",\\\"$STI_SCRIPTS_PATH/usage\\\"]\",\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"containers\":[{\"name\":\"insults\",\"image\":\"172.30.200.195:5000/insultapp3/insults@sha256:870c662b4547805502964cb33e4e1197573ccfc0a81149bd99518988b47b1b58\",\"ports\":[{\"containerPort\":8080,\"protocol\":\"TCP\"}],\"resources\":{},\"terminationMessagePath\":\"/dev/termination-log\",\"imagePullPolicy\":\"Always\"}],\"restartPolicy\":\"Always\",\"terminationGracePeriodSeconds\":30,\"dnsPolicy\":\"ClusterFirst\",\"securityContext\":{}}}},\"status\":{\"latestVersion\":2,\"details\":{\"causes\":[{\"type\":\"ImageChange\",\"imageTrigger\":{\"from\":{\"kind\":\"ImageStreamTag\",\"name\":\"insults:latest\"}}}]}}}\n"
+                }
+            },
+            "spec": {
+                "replicas": 0,
+                "selector": {
+                    "app": "insults",
+                    "deployment": "insults-2",
+                    "deploymentconfig": "insults"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "app": "insults",
+                            "deployment": "insults-2",
+                            "deploymentconfig": "insults"
+                        },
+                        "annotations": {
+                            "openshift.io/container.insults.image.entrypoint": "[\"container-entrypoint\",\"/bin/sh\",\"-c\",\"$STI_SCRIPTS_PATH/usage\"]",
+                            "openshift.io/deployment-config.latest-version": "2",
+                            "openshift.io/deployment-config.name": "insults",
+                            "openshift.io/deployment.name": "insults-2",
+                            "openshift.io/generated-by": "OpenShiftNewApp"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "insults",
+                                "image": "172.30.200.195:5000/insultapp3/insults@sha256:870c662b4547805502964cb33e4e1197573ccfc0a81149bd99518988b47b1b58",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "imagePullPolicy": "Always"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {}
+                    }
+                }
+            },
+            "status": {
+                "replicas": 0
+            }
+        },
+        {
+            "kind": "ReplicationController",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-3",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults",
+                    "openshift.io/deployment-config.name": "insults"
+                },
+                "annotations": {
+                    "kubectl.kubernetes.io/desired-replicas": "1",
+                    "kubectl.kubernetes.io/update-source-id": "insults-2:b6e340b7-22c6-11e8-9b10-525400659b2e",
+                    "openshift.io/deployer-pod.name": "insults-3-deploy",
+                    "openshift.io/deployment-config.latest-version": "3",
+                    "openshift.io/deployment-config.name": "insults",
+                    "openshift.io/deployment.cancelled": "true",
+                    "openshift.io/deployment.phase": "Failed",
+                    "openshift.io/deployment.replicas": "0",
+                    "openshift.io/deployment.status-reason": "cancelled as a newer deployment was found running",
+                    "openshift.io/encoded-deployment-config": "{\"kind\":\"DeploymentConfig\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"insults\",\"namespace\":\"insultapp3\",\"selfLink\":\"/oapi/v1/namespaces/insultapp3/deploymentconfigs/insults\",\"uid\":\"6f2f1993-22c5-11e8-9b10-525400659b2e\",\"resourceVersion\":\"10481\",\"creationTimestamp\":\"2018-03-08T11:40:00Z\",\"labels\":{\"app\":\"insults\"},\"annotations\":{\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"strategy\":{\"type\":\"Rolling\",\"rollingParams\":{\"updatePeriodSeconds\":1,\"intervalSeconds\":1,\"timeoutSeconds\":600,\"maxUnavailable\":\"25%\",\"maxSurge\":\"25%\"},\"resources\":{}},\"triggers\":[{\"type\":\"ConfigChange\"},{\"type\":\"ImageChange\",\"imageChangeParams\":{\"automatic\":true,\"containerNames\":[\"insults\"],\"from\":{\"kind\":\"ImageStreamTag\",\"name\":\"insults:latest\"},\"lastTriggeredImage\":\"172.30.200.195:5000/insultapp3/insults@sha256:92f1f26a3ffeb80f6b4d9f95986b6a95557ce3ddc01f8475b1bf3ff5a1321cb6\"}}],\"replicas\":1,\"test\":false,\"selector\":{\"app\":\"insults\",\"deploymentconfig\":\"insults\"},\"template\":{\"metadata\":{\"creationTimestamp\":null,\"labels\":{\"app\":\"insults\",\"deploymentconfig\":\"insults\"},\"annotations\":{\"openshift.io/container.insults.image.entrypoint\":\"[\\\"container-entrypoint\\\",\\\"/bin/sh\\\",\\\"-c\\\",\\\"$STI_SCRIPTS_PATH/usage\\\"]\",\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"containers\":[{\"name\":\"insults\",\"image\":\"172.30.200.195:5000/insultapp3/insults@sha256:92f1f26a3ffeb80f6b4d9f95986b6a95557ce3ddc01f8475b1bf3ff5a1321cb6\",\"ports\":[{\"containerPort\":8080,\"protocol\":\"TCP\"}],\"resources\":{},\"terminationMessagePath\":\"/dev/termination-log\",\"imagePullPolicy\":\"Always\"}],\"restartPolicy\":\"Always\",\"terminationGracePeriodSeconds\":30,\"dnsPolicy\":\"ClusterFirst\",\"securityContext\":{}}}},\"status\":{\"latestVersion\":3,\"details\":{\"causes\":[{\"type\":\"ImageChange\",\"imageTrigger\":{\"from\":{\"kind\":\"ImageStreamTag\",\"name\":\"insults:latest\"}}}]}}}\n"
+                }
+            },
+            "spec": {
+                "replicas": 0,
+                "selector": {
+                    "app": "insults",
+                    "deployment": "insults-3",
+                    "deploymentconfig": "insults"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "app": "insults",
+                            "deployment": "insults-3",
+                            "deploymentconfig": "insults"
+                        },
+                        "annotations": {
+                            "openshift.io/container.insults.image.entrypoint": "[\"container-entrypoint\",\"/bin/sh\",\"-c\",\"$STI_SCRIPTS_PATH/usage\"]",
+                            "openshift.io/deployment-config.latest-version": "3",
+                            "openshift.io/deployment-config.name": "insults",
+                            "openshift.io/deployment.name": "insults-3",
+                            "openshift.io/generated-by": "OpenShiftNewApp"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "insults",
+                                "image": "172.30.200.195:5000/insultapp3/insults@sha256:92f1f26a3ffeb80f6b4d9f95986b6a95557ce3ddc01f8475b1bf3ff5a1321cb6",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "imagePullPolicy": "Always"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {}
+                    }
+                }
+            },
+            "status": {
+                "replicas": 0
+            }
+        },
+        {
+            "kind": "ReplicationController",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-4",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults",
+                    "openshift.io/deployment-config.name": "insults"
+                },
+                "annotations": {
+                    "kubectl.kubernetes.io/original-replicas": "1",
+                    "openshift.io/deployer-pod.name": "insults-4-deploy",
+                    "openshift.io/deployment-config.latest-version": "4",
+                    "openshift.io/deployment-config.name": "insults",
+                    "openshift.io/deployment.phase": "Complete",
+                    "openshift.io/deployment.replicas": "0",
+                    "openshift.io/encoded-deployment-config": "{\"kind\":\"DeploymentConfig\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"insults\",\"namespace\":\"insultapp3\",\"selfLink\":\"/oapi/v1/namespaces/insultapp3/deploymentconfigs/insults\",\"uid\":\"6f2f1993-22c5-11e8-9b10-525400659b2e\",\"resourceVersion\":\"10531\",\"creationTimestamp\":\"2018-03-08T11:40:00Z\",\"labels\":{\"app\":\"insults\"},\"annotations\":{\"openshift.io/deployment.cancelled\":\"4\",\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"strategy\":{\"type\":\"Rolling\",\"rollingParams\":{\"updatePeriodSeconds\":1,\"intervalSeconds\":1,\"timeoutSeconds\":600,\"maxUnavailable\":\"25%\",\"maxSurge\":\"25%\"},\"resources\":{}},\"triggers\":[{\"type\":\"ConfigChange\"},{\"type\":\"ImageChange\",\"imageChangeParams\":{\"automatic\":true,\"containerNames\":[\"insults\"],\"from\":{\"kind\":\"ImageStreamTag\",\"name\":\"insults:latest\"},\"lastTriggeredImage\":\"172.30.200.195:5000/insultapp3/insults@sha256:c03a8f27b16c4c74b783172561968144ca257b7e54a5dd6921be50ab6e0957a1\"}}],\"replicas\":1,\"test\":false,\"selector\":{\"app\":\"insults\",\"deploymentconfig\":\"insults\"},\"template\":{\"metadata\":{\"creationTimestamp\":null,\"labels\":{\"app\":\"insults\",\"deploymentconfig\":\"insults\"},\"annotations\":{\"openshift.io/container.insults.image.entrypoint\":\"[\\\"container-entrypoint\\\",\\\"/bin/sh\\\",\\\"-c\\\",\\\"$STI_SCRIPTS_PATH/usage\\\"]\",\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"containers\":[{\"name\":\"insults\",\"image\":\"172.30.200.195:5000/insultapp3/insults@sha256:c03a8f27b16c4c74b783172561968144ca257b7e54a5dd6921be50ab6e0957a1\",\"ports\":[{\"containerPort\":8080,\"protocol\":\"TCP\"}],\"resources\":{},\"terminationMessagePath\":\"/dev/termination-log\",\"imagePullPolicy\":\"Always\"}],\"restartPolicy\":\"Always\",\"terminationGracePeriodSeconds\":30,\"dnsPolicy\":\"ClusterFirst\",\"securityContext\":{}}}},\"status\":{\"latestVersion\":4,\"details\":{\"causes\":[{\"type\":\"ImageChange\",\"imageTrigger\":{\"from\":{\"kind\":\"ImageStreamTag\",\"name\":\"insults:latest\"}}}]}}}\n"
+                }
+            },
+            "spec": {
+                "replicas": 0,
+                "selector": {
+                    "app": "insults",
+                    "deployment": "insults-4",
+                    "deploymentconfig": "insults"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "app": "insults",
+                            "deployment": "insults-4",
+                            "deploymentconfig": "insults"
+                        },
+                        "annotations": {
+                            "openshift.io/container.insults.image.entrypoint": "[\"container-entrypoint\",\"/bin/sh\",\"-c\",\"$STI_SCRIPTS_PATH/usage\"]",
+                            "openshift.io/deployment-config.latest-version": "4",
+                            "openshift.io/deployment-config.name": "insults",
+                            "openshift.io/deployment.name": "insults-4",
+                            "openshift.io/generated-by": "OpenShiftNewApp"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "insults",
+                                "image": "172.30.200.195:5000/insultapp3/insults@sha256:c03a8f27b16c4c74b783172561968144ca257b7e54a5dd6921be50ab6e0957a1",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "imagePullPolicy": "Always"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {}
+                    }
+                }
+            },
+            "status": {
+                "replicas": 0
+            }
+        },
+        {
+            "kind": "ReplicationController",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-5",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults",
+                    "openshift.io/deployment-config.name": "insults"
+                },
+                "annotations": {
+                    "openshift.io/deployer-pod.name": "insults-5-deploy",
+                    "openshift.io/deployment-config.latest-version": "5",
+                    "openshift.io/deployment-config.name": "insults",
+                    "openshift.io/deployment.phase": "Complete",
+                    "openshift.io/deployment.replicas": "1",
+                    "openshift.io/encoded-deployment-config": "{\"kind\":\"DeploymentConfig\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"insults\",\"namespace\":\"insultapp3\",\"selfLink\":\"/oapi/v1/namespaces/insultapp3/deploymentconfigs/insults\",\"uid\":\"6f2f1993-22c5-11e8-9b10-525400659b2e\",\"resourceVersion\":\"10870\",\"creationTimestamp\":\"2018-03-08T11:40:00Z\",\"labels\":{\"app\":\"insults\"},\"annotations\":{\"openshift.io/deployment.cancelled\":\"4\",\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"strategy\":{\"type\":\"Rolling\",\"rollingParams\":{\"updatePeriodSeconds\":1,\"intervalSeconds\":1,\"timeoutSeconds\":600,\"maxUnavailable\":\"25%\",\"maxSurge\":\"25%\"},\"resources\":{}},\"triggers\":[{\"type\":\"ConfigChange\"},{\"type\":\"ImageChange\",\"imageChangeParams\":{\"automatic\":true,\"containerNames\":[\"insults\"],\"from\":{\"kind\":\"ImageStreamTag\",\"name\":\"insults:latest\"},\"lastTriggeredImage\":\"172.30.200.195:5000/insultapp3/insults@sha256:c03a8f27b16c4c74b783172561968144ca257b7e54a5dd6921be50ab6e0957a1\"}}],\"replicas\":1,\"test\":false,\"selector\":{\"app\":\"insults\",\"deploymentconfig\":\"insults\"},\"template\":{\"metadata\":{\"creationTimestamp\":null,\"labels\":{\"app\":\"insults\",\"deploymentconfig\":\"insults\"},\"annotations\":{\"openshift.io/container.insults.image.entrypoint\":\"[\\\"container-entrypoint\\\",\\\"/bin/sh\\\",\\\"-c\\\",\\\"$STI_SCRIPTS_PATH/usage\\\"]\",\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"containers\":[{\"name\":\"insults\",\"image\":\"172.30.200.195:5000/insultapp3/insults@sha256:c03a8f27b16c4c74b783172561968144ca257b7e54a5dd6921be50ab6e0957a1\",\"ports\":[{\"containerPort\":8080,\"protocol\":\"TCP\"}],\"env\":[{\"name\":\"POSTGRESQL_USER\",\"value\":\"insult\"},{\"name\":\"PGPASSWORD\",\"value\":\"insult\"},{\"name\":\"POSTGRESQL_DATABASE\",\"value\":\"insults\"}],\"resources\":{},\"terminationMessagePath\":\"/dev/termination-log\",\"imagePullPolicy\":\"Always\"}],\"restartPolicy\":\"Always\",\"terminationGracePeriodSeconds\":30,\"dnsPolicy\":\"ClusterFirst\",\"securityContext\":{}}}},\"status\":{\"latestVersion\":5,\"details\":{\"causes\":[{\"type\":\"ConfigChange\"}]}}}\n"
+                }
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "app": "insults",
+                    "deployment": "insults-5",
+                    "deploymentconfig": "insults"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "app": "insults",
+                            "deployment": "insults-5",
+                            "deploymentconfig": "insults"
+                        },
+                        "annotations": {
+                            "openshift.io/container.insults.image.entrypoint": "[\"container-entrypoint\",\"/bin/sh\",\"-c\",\"$STI_SCRIPTS_PATH/usage\"]",
+                            "openshift.io/deployment-config.latest-version": "5",
+                            "openshift.io/deployment-config.name": "insults",
+                            "openshift.io/deployment.name": "insults-5",
+                            "openshift.io/generated-by": "OpenShiftNewApp"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "insults",
+                                "image": "172.30.200.195:5000/insultapp3/insults@sha256:c03a8f27b16c4c74b783172561968144ca257b7e54a5dd6921be50ab6e0957a1",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "env": [
+                                    {
+                                        "name": "POSTGRESQL_USER",
+                                        "value": "insult"
+                                    },
+                                    {
+                                        "name": "PGPASSWORD",
+                                        "value": "insult"
+                                    },
+                                    {
+                                        "name": "POSTGRESQL_DATABASE",
+                                        "value": "insults"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "imagePullPolicy": "Always"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {}
+                    }
+                }
+            },
+            "status": {
+                "replicas": 0
+            }
+        },
+        {
+            "kind": "ReplicationController",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "postgresql-1",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "openshift.io/deployment-config.name": "postgresql",
+                    "template": "postgresql-persistent-template"
+                },
+                "annotations": {
+                    "openshift.io/deployer-pod.name": "postgresql-1-deploy",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "postgresql",
+                    "openshift.io/deployment.phase": "Complete",
+                    "openshift.io/deployment.replicas": "1",
+                    "openshift.io/encoded-deployment-config": "{\"kind\":\"DeploymentConfig\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"postgresql\",\"namespace\":\"insultapp3\",\"selfLink\":\"/oapi/v1/namespaces/insultapp3/deploymentconfigs/postgresql\",\"uid\":\"4038489c-22c7-11e8-9b10-525400659b2e\",\"resourceVersion\":\"10685\",\"creationTimestamp\":\"2018-03-08T11:53:00Z\",\"labels\":{\"template\":\"postgresql-persistent-template\"}},\"spec\":{\"strategy\":{\"type\":\"Recreate\",\"recreateParams\":{\"timeoutSeconds\":600},\"resources\":{}},\"triggers\":[{\"type\":\"ImageChange\",\"imageChangeParams\":{\"automatic\":true,\"containerNames\":[\"postgresql\"],\"from\":{\"kind\":\"ImageStreamTag\",\"namespace\":\"openshift\",\"name\":\"postgresql:latest\"},\"lastTriggeredImage\":\"registry.access.redhat.com/rhscl/postgresql-94-rhel7:latest\"}},{\"type\":\"ConfigChange\"}],\"replicas\":1,\"test\":false,\"selector\":{\"name\":\"postgresql\"},\"template\":{\"metadata\":{\"creationTimestamp\":null,\"labels\":{\"name\":\"postgresql\"}},\"spec\":{\"volumes\":[{\"name\":\"postgresql-data\",\"persistentVolumeClaim\":{\"claimName\":\"postgresql\"}}],\"containers\":[{\"name\":\"postgresql\",\"image\":\"registry.access.redhat.com/rhscl/postgresql-94-rhel7:latest\",\"ports\":[{\"containerPort\":5432,\"protocol\":\"TCP\"}],\"env\":[{\"name\":\"POSTGRESQL_USER\",\"value\":\"insult\"},{\"name\":\"POSTGRESQL_PASSWORD\",\"value\":\"insult\"},{\"name\":\"POSTGRESQL_DATABASE\",\"value\":\"insults\"}],\"resources\":{\"limits\":{\"memory\":\"512Mi\"}},\"volumeMounts\":[{\"name\":\"postgresql-data\",\"mountPath\":\"/var/lib/pgsql/data\"}],\"livenessProbe\":{\"tcpSocket\":{\"port\":5432},\"initialDelaySeconds\":30,\"timeoutSeconds\":1,\"periodSeconds\":10,\"successThreshold\":1,\"failureThreshold\":3},\"readinessProbe\":{\"exec\":{\"command\":[\"/bin/sh\",\"-i\",\"-c\",\"psql -h 127.0.0.1 -U $POSTGRESQL_USER -q -d $POSTGRESQL_DATABASE -c 'SELECT 1'\"]},\"initialDelaySeconds\":5,\"timeoutSeconds\":1,\"periodSeconds\":10,\"successThreshold\":1,\"failureThreshold\":3},\"terminationMessagePath\":\"/dev/termination-log\",\"imagePullPolicy\":\"IfNotPresent\",\"securityContext\":{\"capabilities\":{},\"privileged\":false}}],\"restartPolicy\":\"Always\",\"terminationGracePeriodSeconds\":30,\"dnsPolicy\":\"ClusterFirst\",\"securityContext\":{}}}},\"status\":{\"latestVersion\":1,\"details\":{\"causes\":[{\"type\":\"ConfigChange\"}]}}}\n"
+                }
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "deployment": "postgresql-1",
+                    "deploymentconfig": "postgresql",
+                    "name": "postgresql"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "deployment": "postgresql-1",
+                            "deploymentconfig": "postgresql",
+                            "name": "postgresql"
+                        },
+                        "annotations": {
+                            "openshift.io/deployment-config.latest-version": "1",
+                            "openshift.io/deployment-config.name": "postgresql",
+                            "openshift.io/deployment.name": "postgresql-1"
+                        }
+                    },
+                    "spec": {
+                        "volumes": [
+                            {
+                                "name": "postgresql-data",
+                                "persistentVolumeClaim": {
+                                    "claimName": "postgresql"
+                                }
+                            }
+                        ],
+                        "containers": [
+                            {
+                                "name": "postgresql",
+                                "image": "registry.access.redhat.com/rhscl/postgresql-94-rhel7:latest",
+                                "ports": [
+                                    {
+                                        "containerPort": 5432,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "env": [
+                                    {
+                                        "name": "POSTGRESQL_USER",
+                                        "value": "insult"
+                                    },
+                                    {
+                                        "name": "POSTGRESQL_PASSWORD",
+                                        "value": "insult"
+                                    },
+                                    {
+                                        "name": "POSTGRESQL_DATABASE",
+                                        "value": "insults"
+                                    }
+                                ],
+                                "resources": {
+                                    "limits": {
+                                        "memory": "512Mi"
+                                    }
+                                },
+                                "volumeMounts": [
+                                    {
+                                        "name": "postgresql-data",
+                                        "mountPath": "/var/lib/pgsql/data"
+                                    }
+                                ],
+                                "livenessProbe": {
+                                    "tcpSocket": {
+                                        "port": 5432
+                                    },
+                                    "initialDelaySeconds": 30,
+                                    "timeoutSeconds": 1,
+                                    "periodSeconds": 10,
+                                    "successThreshold": 1,
+                                    "failureThreshold": 3
+                                },
+                                "readinessProbe": {
+                                    "exec": {
+                                        "command": [
+                                            "/bin/sh",
+                                            "-i",
+                                            "-c",
+                                            "psql -h 127.0.0.1 -U $POSTGRESQL_USER -q -d $POSTGRESQL_DATABASE -c 'SELECT 1'"
+                                        ]
+                                    },
+                                    "initialDelaySeconds": 5,
+                                    "timeoutSeconds": 1,
+                                    "periodSeconds": 10,
+                                    "successThreshold": 1,
+                                    "failureThreshold": 3
+                                },
+                                "terminationMessagePath": "/dev/termination-log",
+                                "imagePullPolicy": "IfNotPresent",
+                                "securityContext": {
+                                    "capabilities": {},
+                                    "privileged": false
+                                }
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {}
+                    }
+                }
+            },
+            "status": {
+                "replicas": 0
+            }
+        },
+        {
+            "kind": "ReplicationController",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "tomcat-1",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "tomcat",
+                    "openshift.io/deployment-config.name": "tomcat"
+                },
+                "annotations": {
+                    "kubectl.kubernetes.io/desired-replicas": "1",
+                    "openshift.io/deployer-pod.name": "tomcat-1-deploy",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "tomcat",
+                    "openshift.io/deployment.phase": "Failed",
+                    "openshift.io/deployment.replicas": "0",
+                    "openshift.io/encoded-deployment-config": "{\"kind\":\"DeploymentConfig\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"tomcat\",\"namespace\":\"insultapp3\",\"selfLink\":\"/oapi/v1/namespaces/insultapp3/deploymentconfigs/tomcat\",\"uid\":\"bf21c8bb-22da-11e8-9b10-525400659b2e\",\"resourceVersion\":\"11941\",\"creationTimestamp\":\"2018-03-08T14:12:33Z\",\"labels\":{\"app\":\"tomcat\"},\"annotations\":{\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"strategy\":{\"type\":\"Rolling\",\"rollingParams\":{\"updatePeriodSeconds\":1,\"intervalSeconds\":1,\"timeoutSeconds\":600,\"maxUnavailable\":\"25%\",\"maxSurge\":\"25%\"},\"resources\":{}},\"triggers\":[{\"type\":\"ConfigChange\"},{\"type\":\"ImageChange\",\"imageChangeParams\":{\"automatic\":true,\"containerNames\":[\"tomcat\"],\"from\":{\"kind\":\"ImageStreamTag\",\"name\":\"tomcat:8.0\"},\"lastTriggeredImage\":\"tomcat@sha256:20497d1508e60df8f2bc24a061e4badec64e20888d32615190ad5bda2c645a08\"}}],\"replicas\":1,\"test\":false,\"selector\":{\"app\":\"tomcat\",\"deploymentconfig\":\"tomcat\"},\"template\":{\"metadata\":{\"creationTimestamp\":null,\"labels\":{\"app\":\"tomcat\",\"deploymentconfig\":\"tomcat\"},\"annotations\":{\"openshift.io/container.tomcat.image.entrypoint\":\"[\\\"catalina.sh\\\",\\\"run\\\"]\",\"openshift.io/generated-by\":\"OpenShiftNewApp\"}},\"spec\":{\"containers\":[{\"name\":\"tomcat\",\"image\":\"tomcat@sha256:20497d1508e60df8f2bc24a061e4badec64e20888d32615190ad5bda2c645a08\",\"ports\":[{\"containerPort\":8080,\"protocol\":\"TCP\"}],\"resources\":{},\"terminationMessagePath\":\"/dev/termination-log\",\"imagePullPolicy\":\"IfNotPresent\"}],\"restartPolicy\":\"Always\",\"terminationGracePeriodSeconds\":30,\"dnsPolicy\":\"ClusterFirst\",\"securityContext\":{}}}},\"status\":{\"latestVersion\":1,\"details\":{\"causes\":[{\"type\":\"ImageChange\",\"imageTrigger\":{\"from\":{\"kind\":\"ImageStreamTag\",\"name\":\"tomcat:8.0\"}}}]}}}\n"
+                }
+            },
+            "spec": {
+                "replicas": 0,
+                "selector": {
+                    "app": "tomcat",
+                    "deployment": "tomcat-1",
+                    "deploymentconfig": "tomcat"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "app": "tomcat",
+                            "deployment": "tomcat-1",
+                            "deploymentconfig": "tomcat"
+                        },
+                        "annotations": {
+                            "openshift.io/container.tomcat.image.entrypoint": "[\"catalina.sh\",\"run\"]",
+                            "openshift.io/deployment-config.latest-version": "1",
+                            "openshift.io/deployment-config.name": "tomcat",
+                            "openshift.io/deployment.name": "tomcat-1",
+                            "openshift.io/generated-by": "OpenShiftNewApp"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "tomcat",
+                                "image": "tomcat@sha256:20497d1508e60df8f2bc24a061e4badec64e20888d32615190ad5bda2c645a08",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "imagePullPolicy": "IfNotPresent"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {}
+                    }
+                }
+            },
+            "status": {
+                "replicas": 0
+            }
+        },
+        {
+            "kind": "Route",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults"
+                },
+                "annotations": {
+                    "openshift.io/host.generated": "true"
+                }
+            },
+            "spec": {
+                "host": "insults-insultapp3.apps.10.2.2.2.xip.io",
+                "to": {
+                    "kind": "Service",
+                    "name": "insults"
+                },
+                "port": {
+                    "targetPort": "8080-tcp"
+                }
+            },
+            "status": {
+                "ingress": [
+                    {
+                        "host": "insults-insultapp3.apps.10.2.2.2.xip.io",
+                        "routerName": "router",
+                        "conditions": [
+                            {
+                                "type": "Admitted",
+                                "status": "True",
+                                "lastTransitionTime": "2018-03-08T11:43:21Z"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "Service",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "name": "8080-tcp",
+                        "protocol": "TCP",
+                        "port": 8080,
+                        "targetPort": 8080
+                    }
+                ],
+                "selector": {
+                    "app": "insults",
+                    "deploymentconfig": "insults"
+                },
+                "type": "ClusterIP",
+                "sessionAffinity": "None"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "kind": "Service",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "postgresql",
+                "creationTimestamp": null,
+                "labels": {
+                    "template": "postgresql-persistent-template"
+                }
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "name": "postgresql",
+                        "protocol": "TCP",
+                        "port": 5432,
+                        "targetPort": 5432
+                    }
+                ],
+                "selector": {
+                    "name": "postgresql"
+                },
+                "type": "ClusterIP",
+                "sessionAffinity": "None"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "kind": "Service",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "tomcat",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "tomcat"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "name": "8080-tcp",
+                        "protocol": "TCP",
+                        "port": 8080,
+                        "targetPort": 8080
+                    }
+                ],
+                "selector": {
+                    "app": "tomcat",
+                    "deploymentconfig": "tomcat"
+                },
+                "type": "ClusterIP",
+                "sessionAffinity": "None"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-1-build",
+                "creationTimestamp": null,
+                "labels": {
+                    "openshift.io/build.name": "insults-1"
+                },
+                "annotations": {
+                    "openshift.io/build.name": "insults-1",
+                    "openshift.io/scc": "privileged"
+                }
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "docker-socket",
+                        "hostPath": {
+                            "path": "/var/run/docker.sock"
+                        }
+                    },
+                    {
+                        "name": "builder-dockercfg-hoka0-push",
+                        "secret": {
+                            "secretName": "builder-dockercfg-hoka0"
+                        }
+                    },
+                    {
+                        "name": "builder-token-k0udn",
+                        "secret": {
+                            "secretName": "builder-token-k0udn"
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "sti-build",
+                        "image": "openshift/origin-sti-builder:v1.2.0",
+                        "args": [
+                            "--loglevel=0"
+                        ],
+                        "env": [
+                            {
+                                "name": "BUILD",
+                                "value": "{\"kind\":\"Build\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"insults-1\",\"namespace\":\"insultapp3\",\"selfLink\":\"/oapi/v1/namespaces/insultapp3/builds/insults-1\",\"uid\":\"6f36de88-22c5-11e8-9b10-525400659b2e\",\"resourceVersion\":\"10281\",\"creationTimestamp\":\"2018-03-08T11:40:00Z\",\"labels\":{\"app\":\"insults\",\"buildconfig\":\"insults\",\"openshift.io/build-config.name\":\"insults\"},\"annotations\":{\"openshift.io/build.number\":\"1\"}},\"spec\":{\"serviceAccount\":\"builder\",\"source\":{\"type\":\"Git\",\"git\":{\"uri\":\"https://github.com/feali001/book-insultapp.git\"},\"secrets\":[]},\"strategy\":{\"type\":\"Source\",\"sourceStrategy\":{\"from\":{\"kind\":\"DockerImage\",\"name\":\"openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7\"}}},\"output\":{\"to\":{\"kind\":\"DockerImage\",\"name\":\"172.30.200.195:5000/insultapp3/insults:latest\"},\"pushSecret\":{\"name\":\"builder-dockercfg-hoka0\"}},\"resources\":{},\"postCommit\":{}},\"status\":{\"phase\":\"New\",\"outputDockerImageReference\":\"172.30.200.195:5000/insultapp3/insults:latest\",\"config\":{\"kind\":\"BuildConfig\",\"namespace\":\"insultapp3\",\"name\":\"insults\"}}}\n"
+                            },
+                            {
+                                "name": "BUILD_LOGLEVEL",
+                                "value": "0"
+                            },
+                            {
+                                "name": "SOURCE_REPOSITORY",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "SOURCE_URI",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "ORIGIN_VERSION",
+                                "value": "v1.2.0"
+                            },
+                            {
+                                "name": "ALLOWED_UIDS",
+                                "value": "1-"
+                            },
+                            {
+                                "name": "DROP_CAPS",
+                                "value": "KILL,MKNOD,SETGID,SETUID,SYS_CHROOT"
+                            },
+                            {
+                                "name": "PUSH_DOCKERCFG_PATH",
+                                "value": "/var/run/secrets/openshift.io/push"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "docker-socket",
+                                "mountPath": "/var/run/docker.sock"
+                            },
+                            {
+                                "name": "builder-dockercfg-hoka0-push",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/openshift.io/push"
+                            },
+                            {
+                                "name": "builder-token-k0udn",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "privileged": true
+                        }
+                    }
+                ],
+                "restartPolicy": "Never",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "host": "origin",
+                "serviceAccountName": "builder",
+                "serviceAccount": "builder",
+                "nodeName": "origin",
+                "securityContext": {},
+                "imagePullSecrets": [
+                    {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                ]
+            },
+            "status": {
+                "phase": "Pending"
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-2-build",
+                "creationTimestamp": null,
+                "labels": {
+                    "openshift.io/build.name": "insults-2"
+                },
+                "annotations": {
+                    "openshift.io/build.name": "insults-2",
+                    "openshift.io/scc": "privileged"
+                }
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "docker-socket",
+                        "hostPath": {
+                            "path": "/var/run/docker.sock"
+                        }
+                    },
+                    {
+                        "name": "builder-dockercfg-hoka0-push",
+                        "secret": {
+                            "secretName": "builder-dockercfg-hoka0"
+                        }
+                    },
+                    {
+                        "name": "builder-token-k0udn",
+                        "secret": {
+                            "secretName": "builder-token-k0udn"
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "sti-build",
+                        "image": "openshift/origin-sti-builder:v1.2.0",
+                        "args": [
+                            "--loglevel=0"
+                        ],
+                        "env": [
+                            {
+                                "name": "BUILD",
+                                "value": "{\"kind\":\"Build\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"insults-2\",\"namespace\":\"insultapp3\",\"selfLink\":\"/oapi/v1/namespaces/insultapp3/builds/insults-2\",\"uid\":\"9c292f04-22c6-11e8-9b10-525400659b2e\",\"resourceVersion\":\"10383\",\"creationTimestamp\":\"2018-03-08T11:48:25Z\",\"labels\":{\"app\":\"insults\",\"buildconfig\":\"insults\",\"openshift.io/build-config.name\":\"insults\"},\"annotations\":{\"openshift.io/build.number\":\"2\"}},\"spec\":{\"serviceAccount\":\"builder\",\"source\":{\"type\":\"Git\",\"git\":{\"uri\":\"https://github.com/feali001/book-insultapp.git\"},\"secrets\":[]},\"strategy\":{\"type\":\"Source\",\"sourceStrategy\":{\"from\":{\"kind\":\"DockerImage\",\"name\":\"openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7\"}}},\"output\":{\"to\":{\"kind\":\"DockerImage\",\"name\":\"172.30.200.195:5000/insultapp3/insults:latest\"},\"pushSecret\":{\"name\":\"builder-dockercfg-hoka0\"}},\"resources\":{},\"postCommit\":{}},\"status\":{\"phase\":\"New\",\"outputDockerImageReference\":\"172.30.200.195:5000/insultapp3/insults:latest\",\"config\":{\"kind\":\"BuildConfig\",\"namespace\":\"insultapp3\",\"name\":\"insults\"}}}\n"
+                            },
+                            {
+                                "name": "BUILD_LOGLEVEL",
+                                "value": "0"
+                            },
+                            {
+                                "name": "SOURCE_REPOSITORY",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "SOURCE_URI",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "ORIGIN_VERSION",
+                                "value": "v1.2.0"
+                            },
+                            {
+                                "name": "ALLOWED_UIDS",
+                                "value": "1-"
+                            },
+                            {
+                                "name": "DROP_CAPS",
+                                "value": "KILL,MKNOD,SETGID,SETUID,SYS_CHROOT"
+                            },
+                            {
+                                "name": "PUSH_DOCKERCFG_PATH",
+                                "value": "/var/run/secrets/openshift.io/push"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "docker-socket",
+                                "mountPath": "/var/run/docker.sock"
+                            },
+                            {
+                                "name": "builder-dockercfg-hoka0-push",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/openshift.io/push"
+                            },
+                            {
+                                "name": "builder-token-k0udn",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "privileged": true
+                        }
+                    }
+                ],
+                "restartPolicy": "Never",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "host": "origin",
+                "serviceAccountName": "builder",
+                "serviceAccount": "builder",
+                "nodeName": "origin",
+                "securityContext": {},
+                "imagePullSecrets": [
+                    {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                ]
+            },
+            "status": {
+                "phase": "Pending"
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-3-build",
+                "creationTimestamp": null,
+                "labels": {
+                    "openshift.io/build.name": "insults-3"
+                },
+                "annotations": {
+                    "openshift.io/build.name": "insults-3",
+                    "openshift.io/scc": "privileged"
+                }
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "docker-socket",
+                        "hostPath": {
+                            "path": "/var/run/docker.sock"
+                        }
+                    },
+                    {
+                        "name": "builder-dockercfg-hoka0-push",
+                        "secret": {
+                            "secretName": "builder-dockercfg-hoka0"
+                        }
+                    },
+                    {
+                        "name": "builder-token-k0udn",
+                        "secret": {
+                            "secretName": "builder-token-k0udn"
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "sti-build",
+                        "image": "openshift/origin-sti-builder:v1.2.0",
+                        "args": [
+                            "--loglevel=0"
+                        ],
+                        "env": [
+                            {
+                                "name": "BUILD",
+                                "value": "{\"kind\":\"Build\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"insults-3\",\"namespace\":\"insultapp3\",\"selfLink\":\"/oapi/v1/namespaces/insultapp3/builds/insults-3\",\"uid\":\"a1ef5366-22c6-11e8-9b10-525400659b2e\",\"resourceVersion\":\"10397\",\"creationTimestamp\":\"2018-03-08T11:48:35Z\",\"labels\":{\"app\":\"insults\",\"buildconfig\":\"insults\",\"openshift.io/build-config.name\":\"insults\"},\"annotations\":{\"openshift.io/build.number\":\"3\"}},\"spec\":{\"serviceAccount\":\"builder\",\"source\":{\"type\":\"Git\",\"git\":{\"uri\":\"https://github.com/feali001/book-insultapp.git\"},\"secrets\":[]},\"strategy\":{\"type\":\"Source\",\"sourceStrategy\":{\"from\":{\"kind\":\"DockerImage\",\"name\":\"openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7\"}}},\"output\":{\"to\":{\"kind\":\"DockerImage\",\"name\":\"172.30.200.195:5000/insultapp3/insults:latest\"},\"pushSecret\":{\"name\":\"builder-dockercfg-hoka0\"}},\"resources\":{},\"postCommit\":{}},\"status\":{\"phase\":\"New\",\"outputDockerImageReference\":\"172.30.200.195:5000/insultapp3/insults:latest\",\"config\":{\"kind\":\"BuildConfig\",\"namespace\":\"insultapp3\",\"name\":\"insults\"}}}\n"
+                            },
+                            {
+                                "name": "BUILD_LOGLEVEL",
+                                "value": "0"
+                            },
+                            {
+                                "name": "SOURCE_REPOSITORY",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "SOURCE_URI",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "ORIGIN_VERSION",
+                                "value": "v1.2.0"
+                            },
+                            {
+                                "name": "ALLOWED_UIDS",
+                                "value": "1-"
+                            },
+                            {
+                                "name": "DROP_CAPS",
+                                "value": "KILL,MKNOD,SETGID,SETUID,SYS_CHROOT"
+                            },
+                            {
+                                "name": "PUSH_DOCKERCFG_PATH",
+                                "value": "/var/run/secrets/openshift.io/push"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "docker-socket",
+                                "mountPath": "/var/run/docker.sock"
+                            },
+                            {
+                                "name": "builder-dockercfg-hoka0-push",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/openshift.io/push"
+                            },
+                            {
+                                "name": "builder-token-k0udn",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "privileged": true
+                        }
+                    }
+                ],
+                "restartPolicy": "Never",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "host": "origin",
+                "serviceAccountName": "builder",
+                "serviceAccount": "builder",
+                "nodeName": "origin",
+                "securityContext": {},
+                "imagePullSecrets": [
+                    {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                ]
+            },
+            "status": {
+                "phase": "Pending"
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-3-deploy",
+                "creationTimestamp": null,
+                "labels": {
+                    "openshift.io/deployer-pod-for.name": "insults-3"
+                },
+                "annotations": {
+                    "openshift.io/deployment.name": "insults-3",
+                    "openshift.io/scc": "anyuid"
+                }
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "deployer-token-dladh",
+                        "secret": {
+                            "secretName": "deployer-token-dladh"
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "deployment",
+                        "image": "openshift/origin-deployer:v1.2.0",
+                        "env": [
+                            {
+                                "name": "KUBERNETES_MASTER",
+                                "value": "https://10.2.2.2:8443"
+                            },
+                            {
+                                "name": "OPENSHIFT_MASTER",
+                                "value": "https://10.2.2.2:8443"
+                            },
+                            {
+                                "name": "BEARER_TOKEN_FILE",
+                                "value": "/var/run/secrets/kubernetes.io/serviceaccount/token"
+                            },
+                            {
+                                "name": "OPENSHIFT_CA_DATA",
+                                "value": "-----BEGIN CERTIFICATE-----\nMIIC6jCCAdKgAwIBAgIBATANBgkqhkiG9w0BAQsFADAmMSQwIgYDVQQDDBtvcGVu\nc2hpZnQtc2lnbmVyQDE0NjQyMDg1NjAwHhcNMTYwNTI1MjAzNjAwWhcNMjEwNTI0\nMjAzNjAxWjAmMSQwIgYDVQQDDBtvcGVuc2hpZnQtc2lnbmVyQDE0NjQyMDg1NjAw\nggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDZy1T2KSwz7tp+HKh9qmM2\nP101tB7D9D7BkP3Ic0nkQpK/k6Y9jdsCS9klcs26qVVFDnUwo5NJwt4xpCNf4Xa9\nkUYlQNb0Lqy5EjNYVAm1jwBmYDpTnrIjIPawD6Ej/ZzsxVp15uMW4EMDbd+JckAR\n1le43rUJn2tRfsk/3A65EH2VTeiv1E1FrVWPdsGZhGKaAeUzbV6Y7864VM3ASDiX\nTk9ERdHIHiwdgxDzgGBWYqYudazvA208Mu0Jo8m7B/E7zBwj77JS5HyGjoAVt/i7\nWB8m5bowIECyZeSVUk+IGnsbdKO8DxIjQl0ysNuvUA0TXlqufFjTO+R0tjL4uD4l\nAgMBAAGjIzAhMA4GA1UdDwEB/wQEAwICpDAPBgNVHRMBAf8EBTADAQH/MA0GCSqG\nSIb3DQEBCwUAA4IBAQC3IMUHfrzMqTtCEbee16E9jlYKLkcCP2bDfGK1sttxr+uJ\nj80bTm2x/HbMHgt/3curRy33qd/hhqgcaDaUO1S1cIKItfUhL3LwH5ZOzjfIqg4L\neCTmMVfTOwMgc7EdtACaS6i/YQg3+864wvVIc7JZBMcb/fwoIFBmKGGz5+IIFkpl\nOfIIUo9zKSqr/yxd/AwlDLLhA737py0JwS/3Kh3p1PmF6ESaPpjvWwZuPCKCM9dk\nFUwwP1F1sY0K7GELeChSLByHvX7qx0u0hciheHORapG2Enlnm3xdetA7lIFBI/00\n2LyqrnFz8TCYDroyJau9b2/6li6goL2w7CH+NtW4\n-----END CERTIFICATE-----\n"
+                            },
+                            {
+                                "name": "OPENSHIFT_DEPLOYMENT_NAME",
+                                "value": "insults-3"
+                            },
+                            {
+                                "name": "OPENSHIFT_DEPLOYMENT_NAMESPACE",
+                                "value": "insultapp3"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "deployer-token-dladh",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "seLinuxOptions": {
+                                "level": "s0:c10,c0"
+                            }
+                        }
+                    }
+                ],
+                "restartPolicy": "Never",
+                "terminationGracePeriodSeconds": 30,
+                "activeDeadlineSeconds": 1,
+                "dnsPolicy": "ClusterFirst",
+                "host": "origin",
+                "serviceAccountName": "deployer",
+                "serviceAccount": "deployer",
+                "nodeName": "origin",
+                "securityContext": {
+                    "seLinuxOptions": {
+                        "level": "s0:c10,c0"
+                    }
+                },
+                "imagePullSecrets": [
+                    {
+                        "name": "deployer-dockercfg-9fs0x"
+                    }
+                ]
+            },
+            "status": {
+                "phase": "Pending"
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-4-build",
+                "creationTimestamp": null,
+                "labels": {
+                    "openshift.io/build.name": "insults-4"
+                },
+                "annotations": {
+                    "openshift.io/build.name": "insults-4",
+                    "openshift.io/scc": "privileged"
+                }
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "docker-socket",
+                        "hostPath": {
+                            "path": "/var/run/docker.sock"
+                        }
+                    },
+                    {
+                        "name": "builder-dockercfg-hoka0-push",
+                        "secret": {
+                            "secretName": "builder-dockercfg-hoka0"
+                        }
+                    },
+                    {
+                        "name": "builder-token-k0udn",
+                        "secret": {
+                            "secretName": "builder-token-k0udn"
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "sti-build",
+                        "image": "openshift/origin-sti-builder:v1.2.0",
+                        "args": [
+                            "--loglevel=0"
+                        ],
+                        "env": [
+                            {
+                                "name": "BUILD",
+                                "value": "{\"kind\":\"Build\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"insults-4\",\"namespace\":\"insultapp3\",\"selfLink\":\"/oapi/v1/namespaces/insultapp3/builds/insults-4\",\"uid\":\"a3fd5b00-22c6-11e8-9b10-525400659b2e\",\"resourceVersion\":\"10410\",\"creationTimestamp\":\"2018-03-08T11:48:38Z\",\"labels\":{\"app\":\"insults\",\"buildconfig\":\"insults\",\"openshift.io/build-config.name\":\"insults\"},\"annotations\":{\"openshift.io/build.number\":\"4\"}},\"spec\":{\"serviceAccount\":\"builder\",\"source\":{\"type\":\"Git\",\"git\":{\"uri\":\"https://github.com/feali001/book-insultapp.git\"},\"secrets\":[]},\"strategy\":{\"type\":\"Source\",\"sourceStrategy\":{\"from\":{\"kind\":\"DockerImage\",\"name\":\"openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7\"}}},\"output\":{\"to\":{\"kind\":\"DockerImage\",\"name\":\"172.30.200.195:5000/insultapp3/insults:latest\"},\"pushSecret\":{\"name\":\"builder-dockercfg-hoka0\"}},\"resources\":{},\"postCommit\":{}},\"status\":{\"phase\":\"New\",\"outputDockerImageReference\":\"172.30.200.195:5000/insultapp3/insults:latest\",\"config\":{\"kind\":\"BuildConfig\",\"namespace\":\"insultapp3\",\"name\":\"insults\"}}}\n"
+                            },
+                            {
+                                "name": "BUILD_LOGLEVEL",
+                                "value": "0"
+                            },
+                            {
+                                "name": "SOURCE_REPOSITORY",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "SOURCE_URI",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "ORIGIN_VERSION",
+                                "value": "v1.2.0"
+                            },
+                            {
+                                "name": "ALLOWED_UIDS",
+                                "value": "1-"
+                            },
+                            {
+                                "name": "DROP_CAPS",
+                                "value": "KILL,MKNOD,SETGID,SETUID,SYS_CHROOT"
+                            },
+                            {
+                                "name": "PUSH_DOCKERCFG_PATH",
+                                "value": "/var/run/secrets/openshift.io/push"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "docker-socket",
+                                "mountPath": "/var/run/docker.sock"
+                            },
+                            {
+                                "name": "builder-dockercfg-hoka0-push",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/openshift.io/push"
+                            },
+                            {
+                                "name": "builder-token-k0udn",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "privileged": true
+                        }
+                    }
+                ],
+                "restartPolicy": "Never",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "host": "origin",
+                "serviceAccountName": "builder",
+                "serviceAccount": "builder",
+                "nodeName": "origin",
+                "securityContext": {},
+                "imagePullSecrets": [
+                    {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                ]
+            },
+            "status": {
+                "phase": "Pending"
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-5-build",
+                "creationTimestamp": null,
+                "labels": {
+                    "openshift.io/build.name": "insults-5"
+                },
+                "annotations": {
+                    "openshift.io/build.name": "insults-5",
+                    "openshift.io/scc": "privileged"
+                }
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "docker-socket",
+                        "hostPath": {
+                            "path": "/var/run/docker.sock"
+                        }
+                    },
+                    {
+                        "name": "builder-dockercfg-hoka0-push",
+                        "secret": {
+                            "secretName": "builder-dockercfg-hoka0"
+                        }
+                    },
+                    {
+                        "name": "builder-token-k0udn",
+                        "secret": {
+                            "secretName": "builder-token-k0udn"
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "sti-build",
+                        "image": "openshift/origin-sti-builder:v1.2.0",
+                        "args": [
+                            "--loglevel=0"
+                        ],
+                        "env": [
+                            {
+                                "name": "BUILD",
+                                "value": "{\"kind\":\"Build\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"insults-5\",\"namespace\":\"insultapp3\",\"selfLink\":\"/oapi/v1/namespaces/insultapp3/builds/insults-5\",\"uid\":\"78335bc8-22ce-11e8-9b10-525400659b2e\",\"resourceVersion\":\"11074\",\"creationTimestamp\":\"2018-03-08T12:44:41Z\",\"labels\":{\"app\":\"insults\",\"buildconfig\":\"insults\",\"openshift.io/build-config.name\":\"insults\"},\"annotations\":{\"openshift.io/build.number\":\"5\"}},\"spec\":{\"serviceAccount\":\"builder\",\"source\":{\"type\":\"Git\",\"git\":{\"uri\":\"https://github.com/feali001/book-insultapp.git\"},\"secrets\":[]},\"strategy\":{\"type\":\"Source\",\"sourceStrategy\":{\"from\":{\"kind\":\"DockerImage\",\"name\":\"openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7\"}}},\"output\":{\"to\":{\"kind\":\"DockerImage\",\"name\":\"172.30.200.195:5000/insultapp3/insults:latest\"},\"pushSecret\":{\"name\":\"builder-dockercfg-hoka0\"}},\"resources\":{},\"postCommit\":{}},\"status\":{\"phase\":\"New\",\"outputDockerImageReference\":\"172.30.200.195:5000/insultapp3/insults:latest\",\"config\":{\"kind\":\"BuildConfig\",\"namespace\":\"insultapp3\",\"name\":\"insults\"}}}\n"
+                            },
+                            {
+                                "name": "BUILD_LOGLEVEL",
+                                "value": "0"
+                            },
+                            {
+                                "name": "SOURCE_REPOSITORY",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "SOURCE_URI",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "ORIGIN_VERSION",
+                                "value": "v1.2.0"
+                            },
+                            {
+                                "name": "ALLOWED_UIDS",
+                                "value": "1-"
+                            },
+                            {
+                                "name": "DROP_CAPS",
+                                "value": "KILL,MKNOD,SETGID,SETUID,SYS_CHROOT"
+                            },
+                            {
+                                "name": "PUSH_DOCKERCFG_PATH",
+                                "value": "/var/run/secrets/openshift.io/push"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "docker-socket",
+                                "mountPath": "/var/run/docker.sock"
+                            },
+                            {
+                                "name": "builder-dockercfg-hoka0-push",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/openshift.io/push"
+                            },
+                            {
+                                "name": "builder-token-k0udn",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "privileged": true
+                        }
+                    }
+                ],
+                "restartPolicy": "Never",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "host": "origin",
+                "serviceAccountName": "builder",
+                "serviceAccount": "builder",
+                "nodeName": "origin",
+                "securityContext": {},
+                "imagePullSecrets": [
+                    {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                ]
+            },
+            "status": {
+                "phase": "Pending"
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "generateName": "insults-5-",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "insults",
+                    "deployment": "insults-5",
+                    "deploymentconfig": "insults"
+                },
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"insultapp3\",\"name\":\"insults-5\",\"uid\":\"c71a405b-22ca-11e8-9b10-525400659b2e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"10888\"}}\n",
+                    "openshift.io/container.insults.image.entrypoint": "[\"container-entrypoint\",\"/bin/sh\",\"-c\",\"$STI_SCRIPTS_PATH/usage\"]",
+                    "openshift.io/deployment-config.latest-version": "5",
+                    "openshift.io/deployment-config.name": "insults",
+                    "openshift.io/deployment.name": "insults-5",
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/scc": "anyuid"
+                }
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "default-token-6mjkg",
+                        "secret": {
+                            "secretName": "default-token-6mjkg"
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "insults",
+                        "image": "172.30.200.195:5000/insultapp3/insults@sha256:c03a8f27b16c4c74b783172561968144ca257b7e54a5dd6921be50ab6e0957a1",
+                        "ports": [
+                            {
+                                "containerPort": 8080,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "env": [
+                            {
+                                "name": "POSTGRESQL_USER",
+                                "value": "insult"
+                            },
+                            {
+                                "name": "PGPASSWORD",
+                                "value": "insult"
+                            },
+                            {
+                                "name": "POSTGRESQL_DATABASE",
+                                "value": "insults"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "default-token-6mjkg",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "Always",
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "seLinuxOptions": {
+                                "level": "s0:c10,c0"
+                            }
+                        }
+                    }
+                ],
+                "restartPolicy": "Always",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "host": "origin",
+                "serviceAccountName": "default",
+                "serviceAccount": "default",
+                "nodeName": "origin",
+                "securityContext": {
+                    "seLinuxOptions": {
+                        "level": "s0:c10,c0"
+                    }
+                },
+                "imagePullSecrets": [
+                    {
+                        "name": "default-dockercfg-j3nz2"
+                    }
+                ]
+            },
+            "status": {
+                "phase": "Pending"
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-6-build",
+                "creationTimestamp": null,
+                "labels": {
+                    "openshift.io/build.name": "insults-6"
+                },
+                "annotations": {
+                    "openshift.io/build.name": "insults-6",
+                    "openshift.io/scc": "privileged"
+                }
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "docker-socket",
+                        "hostPath": {
+                            "path": "/var/run/docker.sock"
+                        }
+                    },
+                    {
+                        "name": "builder-dockercfg-hoka0-push",
+                        "secret": {
+                            "secretName": "builder-dockercfg-hoka0"
+                        }
+                    },
+                    {
+                        "name": "builder-token-k0udn",
+                        "secret": {
+                            "secretName": "builder-token-k0udn"
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "sti-build",
+                        "image": "openshift/origin-sti-builder:v1.2.0",
+                        "args": [
+                            "--loglevel=0"
+                        ],
+                        "env": [
+                            {
+                                "name": "BUILD",
+                                "value": "{\"kind\":\"Build\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"insults-6\",\"namespace\":\"insultapp3\",\"selfLink\":\"/oapi/v1/namespaces/insultapp3/builds/insults-6\",\"uid\":\"a9f91808-22ce-11e8-9b10-525400659b2e\",\"resourceVersion\":\"11098\",\"creationTimestamp\":\"2018-03-08T12:46:04Z\",\"labels\":{\"app\":\"insults\",\"buildconfig\":\"insults\",\"openshift.io/build-config.name\":\"insults\"},\"annotations\":{\"openshift.io/build.number\":\"6\"}},\"spec\":{\"serviceAccount\":\"builder\",\"source\":{\"type\":\"Git\",\"git\":{\"uri\":\"https://github.com/feali001/book-insultapp.git\"},\"secrets\":[]},\"strategy\":{\"type\":\"Source\",\"sourceStrategy\":{\"from\":{\"kind\":\"DockerImage\",\"name\":\"openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7\"}}},\"output\":{\"to\":{\"kind\":\"DockerImage\",\"name\":\"172.30.200.195:5000/insultapp3/insults:latest\"},\"pushSecret\":{\"name\":\"builder-dockercfg-hoka0\"}},\"resources\":{},\"postCommit\":{}},\"status\":{\"phase\":\"New\",\"outputDockerImageReference\":\"172.30.200.195:5000/insultapp3/insults:latest\",\"config\":{\"kind\":\"BuildConfig\",\"namespace\":\"insultapp3\",\"name\":\"insults\"}}}\n"
+                            },
+                            {
+                                "name": "BUILD_LOGLEVEL",
+                                "value": "0"
+                            },
+                            {
+                                "name": "SOURCE_REPOSITORY",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "SOURCE_URI",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "ORIGIN_VERSION",
+                                "value": "v1.2.0"
+                            },
+                            {
+                                "name": "ALLOWED_UIDS",
+                                "value": "1-"
+                            },
+                            {
+                                "name": "DROP_CAPS",
+                                "value": "KILL,MKNOD,SETGID,SETUID,SYS_CHROOT"
+                            },
+                            {
+                                "name": "PUSH_DOCKERCFG_PATH",
+                                "value": "/var/run/secrets/openshift.io/push"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "docker-socket",
+                                "mountPath": "/var/run/docker.sock"
+                            },
+                            {
+                                "name": "builder-dockercfg-hoka0-push",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/openshift.io/push"
+                            },
+                            {
+                                "name": "builder-token-k0udn",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "privileged": true
+                        }
+                    }
+                ],
+                "restartPolicy": "Never",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "host": "origin",
+                "serviceAccountName": "builder",
+                "serviceAccount": "builder",
+                "nodeName": "origin",
+                "securityContext": {},
+                "imagePullSecrets": [
+                    {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                ]
+            },
+            "status": {
+                "phase": "Pending"
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-7-build",
+                "creationTimestamp": null,
+                "labels": {
+                    "openshift.io/build.name": "insults-7"
+                },
+                "annotations": {
+                    "openshift.io/build.name": "insults-7",
+                    "openshift.io/scc": "privileged"
+                }
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "docker-socket",
+                        "hostPath": {
+                            "path": "/var/run/docker.sock"
+                        }
+                    },
+                    {
+                        "name": "builder-dockercfg-hoka0-push",
+                        "secret": {
+                            "secretName": "builder-dockercfg-hoka0"
+                        }
+                    },
+                    {
+                        "name": "builder-token-k0udn",
+                        "secret": {
+                            "secretName": "builder-token-k0udn"
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "sti-build",
+                        "image": "openshift/origin-sti-builder:v1.2.0",
+                        "args": [
+                            "--loglevel=0"
+                        ],
+                        "env": [
+                            {
+                                "name": "BUILD",
+                                "value": "{\"kind\":\"Build\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"insults-7\",\"namespace\":\"insultapp3\",\"selfLink\":\"/oapi/v1/namespaces/insultapp3/builds/insults-7\",\"uid\":\"3d396d72-22cf-11e8-9b10-525400659b2e\",\"resourceVersion\":\"11207\",\"creationTimestamp\":\"2018-03-08T12:50:11Z\",\"labels\":{\"app\":\"insults\",\"buildconfig\":\"insults\",\"openshift.io/build-config.name\":\"insults\"},\"annotations\":{\"openshift.io/build.number\":\"7\"}},\"spec\":{\"serviceAccount\":\"builder\",\"source\":{\"type\":\"Git\",\"git\":{\"uri\":\"https://github.com/feali001/book-insultapp.git\"},\"secrets\":[]},\"strategy\":{\"type\":\"Source\",\"sourceStrategy\":{\"from\":{\"kind\":\"DockerImage\",\"name\":\"openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7\"}}},\"output\":{\"to\":{\"kind\":\"DockerImage\",\"name\":\"172.30.200.195:5000/insultapp3/insults:latest\"},\"pushSecret\":{\"name\":\"builder-dockercfg-hoka0\"}},\"resources\":{},\"postCommit\":{}},\"status\":{\"phase\":\"New\",\"outputDockerImageReference\":\"172.30.200.195:5000/insultapp3/insults:latest\",\"config\":{\"kind\":\"BuildConfig\",\"namespace\":\"insultapp3\",\"name\":\"insults\"}}}\n"
+                            },
+                            {
+                                "name": "BUILD_LOGLEVEL",
+                                "value": "0"
+                            },
+                            {
+                                "name": "SOURCE_REPOSITORY",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "SOURCE_URI",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "ORIGIN_VERSION",
+                                "value": "v1.2.0"
+                            },
+                            {
+                                "name": "ALLOWED_UIDS",
+                                "value": "1-"
+                            },
+                            {
+                                "name": "DROP_CAPS",
+                                "value": "KILL,MKNOD,SETGID,SETUID,SYS_CHROOT"
+                            },
+                            {
+                                "name": "PUSH_DOCKERCFG_PATH",
+                                "value": "/var/run/secrets/openshift.io/push"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "docker-socket",
+                                "mountPath": "/var/run/docker.sock"
+                            },
+                            {
+                                "name": "builder-dockercfg-hoka0-push",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/openshift.io/push"
+                            },
+                            {
+                                "name": "builder-token-k0udn",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "privileged": true
+                        }
+                    }
+                ],
+                "restartPolicy": "Never",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "host": "origin",
+                "serviceAccountName": "builder",
+                "serviceAccount": "builder",
+                "nodeName": "origin",
+                "securityContext": {},
+                "imagePullSecrets": [
+                    {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                ]
+            },
+            "status": {
+                "phase": "Pending"
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "insults-8-build",
+                "creationTimestamp": null,
+                "labels": {
+                    "openshift.io/build.name": "insults-8"
+                },
+                "annotations": {
+                    "openshift.io/build.name": "insults-8",
+                    "openshift.io/scc": "privileged"
+                }
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "docker-socket",
+                        "hostPath": {
+                            "path": "/var/run/docker.sock"
+                        }
+                    },
+                    {
+                        "name": "builder-dockercfg-hoka0-push",
+                        "secret": {
+                            "secretName": "builder-dockercfg-hoka0"
+                        }
+                    },
+                    {
+                        "name": "builder-token-k0udn",
+                        "secret": {
+                            "secretName": "builder-token-k0udn"
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "sti-build",
+                        "image": "openshift/origin-sti-builder:v1.2.0",
+                        "args": [
+                            "--loglevel=0"
+                        ],
+                        "env": [
+                            {
+                                "name": "BUILD",
+                                "value": "{\"kind\":\"Build\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"insults-8\",\"namespace\":\"insultapp3\",\"selfLink\":\"/oapi/v1/namespaces/insultapp3/builds/insults-8\",\"uid\":\"b16365d1-22cf-11e8-9b10-525400659b2e\",\"resourceVersion\":\"11241\",\"creationTimestamp\":\"2018-03-08T12:53:26Z\",\"labels\":{\"app\":\"insults\",\"buildconfig\":\"insults\",\"openshift.io/build-config.name\":\"insults\"},\"annotations\":{\"openshift.io/build.number\":\"8\"}},\"spec\":{\"serviceAccount\":\"builder\",\"source\":{\"type\":\"Git\",\"git\":{\"uri\":\"https://github.com/feali001/book-insultapp.git\"},\"secrets\":[]},\"strategy\":{\"type\":\"Source\",\"sourceStrategy\":{\"from\":{\"kind\":\"DockerImage\",\"name\":\"openshift/wildfly-100-centos7@sha256:048814904e6c691dbec65a3f1bc36e313c4ef05c4090eb7964f45c9a3a40fba7\"}}},\"output\":{\"to\":{\"kind\":\"DockerImage\",\"name\":\"172.30.200.195:5000/insultapp3/insults:latest\"},\"pushSecret\":{\"name\":\"builder-dockercfg-hoka0\"}},\"resources\":{},\"postCommit\":{}},\"status\":{\"phase\":\"New\",\"outputDockerImageReference\":\"172.30.200.195:5000/insultapp3/insults:latest\",\"config\":{\"kind\":\"BuildConfig\",\"namespace\":\"insultapp3\",\"name\":\"insults\"}}}\n"
+                            },
+                            {
+                                "name": "BUILD_LOGLEVEL",
+                                "value": "0"
+                            },
+                            {
+                                "name": "SOURCE_REPOSITORY",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "SOURCE_URI",
+                                "value": "https://github.com/feali001/book-insultapp.git"
+                            },
+                            {
+                                "name": "ORIGIN_VERSION",
+                                "value": "v1.2.0"
+                            },
+                            {
+                                "name": "ALLOWED_UIDS",
+                                "value": "1-"
+                            },
+                            {
+                                "name": "DROP_CAPS",
+                                "value": "KILL,MKNOD,SETGID,SETUID,SYS_CHROOT"
+                            },
+                            {
+                                "name": "PUSH_DOCKERCFG_PATH",
+                                "value": "/var/run/secrets/openshift.io/push"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "docker-socket",
+                                "mountPath": "/var/run/docker.sock"
+                            },
+                            {
+                                "name": "builder-dockercfg-hoka0-push",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/openshift.io/push"
+                            },
+                            {
+                                "name": "builder-token-k0udn",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "privileged": true
+                        }
+                    }
+                ],
+                "restartPolicy": "Never",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "host": "origin",
+                "serviceAccountName": "builder",
+                "serviceAccount": "builder",
+                "nodeName": "origin",
+                "securityContext": {},
+                "imagePullSecrets": [
+                    {
+                        "name": "builder-dockercfg-hoka0"
+                    }
+                ]
+            },
+            "status": {
+                "phase": "Pending"
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "generateName": "postgresql-1-",
+                "creationTimestamp": null,
+                "labels": {
+                    "deployment": "postgresql-1",
+                    "deploymentconfig": "postgresql",
+                    "name": "postgresql"
+                },
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"insultapp3\",\"name\":\"postgresql-1\",\"uid\":\"40c392b6-22c7-11e8-9b10-525400659b2e\",\"apiVersion\":\"v1\",\"resourceVersion\":\"10700\"}}\n",
+                    "openshift.io/deployment-config.latest-version": "1",
+                    "openshift.io/deployment-config.name": "postgresql",
+                    "openshift.io/deployment.name": "postgresql-1",
+                    "openshift.io/scc": "anyuid"
+                }
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "postgresql-data",
+                        "persistentVolumeClaim": {
+                            "claimName": "postgresql"
+                        }
+                    },
+                    {
+                        "name": "default-token-6mjkg",
+                        "secret": {
+                            "secretName": "default-token-6mjkg"
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "postgresql",
+                        "image": "registry.access.redhat.com/rhscl/postgresql-94-rhel7:latest",
+                        "ports": [
+                            {
+                                "containerPort": 5432,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "env": [
+                            {
+                                "name": "POSTGRESQL_USER",
+                                "value": "insult"
+                            },
+                            {
+                                "name": "POSTGRESQL_PASSWORD",
+                                "value": "insult"
+                            },
+                            {
+                                "name": "POSTGRESQL_DATABASE",
+                                "value": "insults"
+                            }
+                        ],
+                        "resources": {
+                            "limits": {
+                                "memory": "512Mi"
+                            },
+                            "requests": {
+                                "memory": "512Mi"
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "name": "postgresql-data",
+                                "mountPath": "/var/lib/pgsql/data"
+                            },
+                            {
+                                "name": "default-token-6mjkg",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "livenessProbe": {
+                            "tcpSocket": {
+                                "port": 5432
+                            },
+                            "initialDelaySeconds": 30,
+                            "timeoutSeconds": 1,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "failureThreshold": 3
+                        },
+                        "readinessProbe": {
+                            "exec": {
+                                "command": [
+                                    "/bin/sh",
+                                    "-i",
+                                    "-c",
+                                    "psql -h 127.0.0.1 -U $POSTGRESQL_USER -q -d $POSTGRESQL_DATABASE -c 'SELECT 1'"
+                                ]
+                            },
+                            "initialDelaySeconds": 5,
+                            "timeoutSeconds": 1,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "failureThreshold": 3
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "seLinuxOptions": {
+                                "level": "s0:c10,c0"
+                            }
+                        }
+                    }
+                ],
+                "restartPolicy": "Always",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "host": "origin",
+                "serviceAccountName": "default",
+                "serviceAccount": "default",
+                "nodeName": "origin",
+                "securityContext": {
+                    "seLinuxOptions": {
+                        "level": "s0:c10,c0"
+                    }
+                },
+                "imagePullSecrets": [
+                    {
+                        "name": "default-dockercfg-j3nz2"
+                    }
+                ]
+            },
+            "status": {
+                "phase": "Pending"
+            }
+        },
+        {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "tomcat-1-deploy",
+                "creationTimestamp": null,
+                "labels": {
+                    "openshift.io/deployer-pod-for.name": "tomcat-1"
+                },
+                "annotations": {
+                    "openshift.io/deployment.name": "tomcat-1",
+                    "openshift.io/scc": "anyuid"
+                }
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "deployer-token-dladh",
+                        "secret": {
+                            "secretName": "deployer-token-dladh"
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "deployment",
+                        "image": "openshift/origin-deployer:v1.2.0",
+                        "env": [
+                            {
+                                "name": "KUBERNETES_MASTER",
+                                "value": "https://10.2.2.2:8443"
+                            },
+                            {
+                                "name": "OPENSHIFT_MASTER",
+                                "value": "https://10.2.2.2:8443"
+                            },
+                            {
+                                "name": "BEARER_TOKEN_FILE",
+                                "value": "/var/run/secrets/kubernetes.io/serviceaccount/token"
+                            },
+                            {
+                                "name": "OPENSHIFT_CA_DATA",
+                                "value": "-----BEGIN CERTIFICATE-----\nMIIC6jCCAdKgAwIBAgIBATANBgkqhkiG9w0BAQsFADAmMSQwIgYDVQQDDBtvcGVu\nc2hpZnQtc2lnbmVyQDE0NjQyMDg1NjAwHhcNMTYwNTI1MjAzNjAwWhcNMjEwNTI0\nMjAzNjAxWjAmMSQwIgYDVQQDDBtvcGVuc2hpZnQtc2lnbmVyQDE0NjQyMDg1NjAw\nggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDZy1T2KSwz7tp+HKh9qmM2\nP101tB7D9D7BkP3Ic0nkQpK/k6Y9jdsCS9klcs26qVVFDnUwo5NJwt4xpCNf4Xa9\nkUYlQNb0Lqy5EjNYVAm1jwBmYDpTnrIjIPawD6Ej/ZzsxVp15uMW4EMDbd+JckAR\n1le43rUJn2tRfsk/3A65EH2VTeiv1E1FrVWPdsGZhGKaAeUzbV6Y7864VM3ASDiX\nTk9ERdHIHiwdgxDzgGBWYqYudazvA208Mu0Jo8m7B/E7zBwj77JS5HyGjoAVt/i7\nWB8m5bowIECyZeSVUk+IGnsbdKO8DxIjQl0ysNuvUA0TXlqufFjTO+R0tjL4uD4l\nAgMBAAGjIzAhMA4GA1UdDwEB/wQEAwICpDAPBgNVHRMBAf8EBTADAQH/MA0GCSqG\nSIb3DQEBCwUAA4IBAQC3IMUHfrzMqTtCEbee16E9jlYKLkcCP2bDfGK1sttxr+uJ\nj80bTm2x/HbMHgt/3curRy33qd/hhqgcaDaUO1S1cIKItfUhL3LwH5ZOzjfIqg4L\neCTmMVfTOwMgc7EdtACaS6i/YQg3+864wvVIc7JZBMcb/fwoIFBmKGGz5+IIFkpl\nOfIIUo9zKSqr/yxd/AwlDLLhA737py0JwS/3Kh3p1PmF6ESaPpjvWwZuPCKCM9dk\nFUwwP1F1sY0K7GELeChSLByHvX7qx0u0hciheHORapG2Enlnm3xdetA7lIFBI/00\n2LyqrnFz8TCYDroyJau9b2/6li6goL2w7CH+NtW4\n-----END CERTIFICATE-----\n"
+                            },
+                            {
+                                "name": "OPENSHIFT_DEPLOYMENT_NAME",
+                                "value": "tomcat-1"
+                            },
+                            {
+                                "name": "OPENSHIFT_DEPLOYMENT_NAMESPACE",
+                                "value": "insultapp3"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "deployer-token-dladh",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "capabilities": {
+                                "drop": [
+                                    "KILL",
+                                    "MKNOD",
+                                    "SYS_CHROOT"
+                                ]
+                            },
+                            "privileged": false,
+                            "seLinuxOptions": {
+                                "level": "s0:c10,c0"
+                            }
+                        }
+                    }
+                ],
+                "restartPolicy": "Never",
+                "terminationGracePeriodSeconds": 30,
+                "activeDeadlineSeconds": 21600,
+                "dnsPolicy": "ClusterFirst",
+                "host": "origin",
+                "serviceAccountName": "deployer",
+                "serviceAccount": "deployer",
+                "nodeName": "origin",
+                "securityContext": {
+                    "seLinuxOptions": {
+                        "level": "s0:c10,c0"
+                    }
+                },
+                "imagePullSecrets": [
+                    {
+                        "name": "deployer-dockercfg-9fs0x"
+                    }
+                ]
+            },
+            "status": {
+                "phase": "Pending"
+            }
+        }
+    ]
+}
